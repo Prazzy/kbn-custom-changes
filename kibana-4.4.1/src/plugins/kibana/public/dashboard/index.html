@@ -1,0 +1,169 @@
+<div>
+  <nav
+    ng-style="::{ background: chrome.getNavBackground() }"
+    class="show navbar navbar-inverse navbar-static-top">
+
+    <!-- Mobile navbar -->
+    <div class="navbar-header">
+      <button ng-click="showCollapsed = !showCollapsed" type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span class="visible-xs">
+        <span ng-if="chrome.getBrand('title')" class="navbar-brand">{{ chrome.getBrand('title') }}</span>
+        <span ng-if="chrome.getActiveTabTitle()" class="navbar-brand">{{ chrome.getActiveTabTitle() }}</span>
+        <span ng-show="chrome.httpActive.length" class="spinner"></span>
+      </span>
+    </div>
+    <!-- /Mobile navbar -->
+
+    <!-- Full navbar -->
+    <div ng-class="{ show: chrome.getVisible() }" collapse="!showCollapsed" class="navbar-collapse" kbn-chrome-append-nav-controls>
+      <ul class="nav navbar-nav" role="navigation" >
+        <!--<li-->
+          <!--ng-if="chrome.getBrand('logo')"-->
+          <!--ng-style="{ 'background': chrome.getBrand('logo') }"-->
+          <!--aria-label="{{ chrome.getAppTitle() }} Logo"-->
+          <!--class="logo hidden-sm"-->
+          <!--&gt;</li>-->
+
+        <!--<li-->
+          <!--ng-if="chrome.getBrand('smallLogo')"-->
+          <!--ng-style="{ 'background': chrome.getBrand('smallLogo') }"-->
+          <!--aria-label="{{ chrome.getAppTitle() }} Logo"-->
+          <!--class="logo-small visible-sm hidden-xs"-->
+          <!--&gt;</li>-->
+
+        <li ng-if="chrome.getBrand('title')" class="navbar-brand">{{ chrome.getBrand('title') }}</li>
+        <li ng-repeat="tab in chrome.getTabs()" ng-class="{ active: tab.active }">
+          <a ng-href="{{ tab.href() }}" ng-style="{ 'border-bottom-color': tab.activeIndicatorColor }">
+            {{ tab.title }}
+          </a>
+        </li>
+
+        <li class="to-body" ng-class="{ active: appSwitcherTemplate.is('switcher') }" ng-if="chrome.getShowAppsLink()">
+          <a ng-click="appSwitcherTemplate.toggle('switcher')">
+            <i class="fa fa-th" alt="Show app switcher"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- /Full navbar -->
+  </nav>
+
+  <!-- TODO: These config dropdowns shouldn't be hard coded -->
+  <config
+    config-template="appSwitcherTemplate"
+    config-object="chrome"
+    config-close="appSwitcherTemplate.close">
+  </config>
+
+  <config
+    ng-show="timefilter.enabled"
+    config-template="pickerTemplate"
+    config-object="timefilter"
+    config-close="pickerTemplate.close">
+  </config>
+</div>
+<div dashboard-app class="app-container dashboard-container">
+  <navbar ng-show="chrome.getVisible()">
+    <span class="name" ng-if="dash.id" ng-bind="::dash.title" tooltip="{{::dash.title}}"></span>
+
+    <form name="queryInput"
+      class="fill inline-form"
+      ng-submit="filterResults()"
+      role="form">
+
+      <div class="typeahead" kbn-typeahead="dashboard">
+        <div class="input-group"
+          ng-class="queryInput.$invalid ? 'has-error' : ''">
+
+          <input
+            type="text"
+            placeholder="Filter..."
+            aria-label="Filter input"
+            class="form-control"
+            ng-model="state.query"
+            input-focus
+            kbn-typeahead-input
+            parse-query>
+          <button type="submit" class="btn btn-default" ng-disabled="queryInput.$invalid" aria-label="Filter dashboards">
+            <span aria-hidden="true" class="fa fa-search"></span>
+          </button>
+        </div>
+
+        <kbn-typeahead-items></kbn-typeahead-items>
+      </div>
+
+    </form>
+
+    <div class="button-group" role="toolbar">
+      <kbn-tooltip text="New Dashboard" placement="bottom" append-to-body="1">
+        <button ng-click="newDashboard()" aria-label="New Dashboard"><i aria-hidden="true" class="fa fa-file-new-o"></i></button>
+      </kbn-tooltip>
+      <kbn-tooltip text="Save Dashboard" placement="bottom" append-to-body="1">
+        <button
+          aria-label="Save Dashboard"
+          aria-haspopup="true"
+          aria-expanded="{{ configTemplate.is('save') }}"
+          ng-class="{active: configTemplate.is('save')}"
+          ng-click="configTemplate.toggle('save');">
+          <i aria-hidden="true" class="fa fa-save"></i>
+        </button>
+      </kbn-tooltip>
+      <kbn-tooltip text="Load Saved Dashboard" placement="bottom" append-to-body="1">
+        <button
+          aria-label="Load Saved Dashboard"
+          aria-haspopup="true"
+          aria-expanded="{{ configTemplate.is('load') }}"
+          ng-class="{active: configTemplate.is('load')}"
+          ng-click="configTemplate.toggle('load');">
+          <i aria-hidden="true" class="fa fa-folder-open-o"></i>
+        </button>
+      </kbn-tooltip>
+      <kbn-tooltip text="Share" placement="bottom" append-to-body="1">
+        <button
+          aria-label="Share Dashboard"
+          aria-haspopup="true"
+          aria-expanded="{{ configTemplate.is('share') }}"
+          ng-class="{active: configTemplate.is('share')}"
+          ng-click="configTemplate.toggle('share');">
+          <i aria-hidden="true" class="fa fa-external-link"></i>
+        </button>
+      </kbn-tooltip>
+      <kbn-tooltip text="Add Visualization" placement="bottom" append-to-body="1">
+        <button
+          aria-label="Add Visualization"
+          aria-haspopup="true"
+          aria-expanded="{{ configTemplate.is('pickVis') }}"
+          ng-class="{active: configTemplate.is('pickVis')}"
+          ng-click="configTemplate.toggle('pickVis');">
+          <i aria-hidden="true" class="fa fa-plus-circle"></i>
+        </button>
+      </kbn-tooltip>
+      <kbn-tooltip text="Options" placement="bottom" append-to-body="1">
+        <button
+          aria-label="Options"
+          aria-haspopup="true"
+          aria-expanded="{{ configTemplate.is('options') }}"
+          ng-class="{active: configTemplate.is('options')}"
+          ng-click="configTemplate.toggle('options');">
+          <i aria-hidden="true" class="fa fa-gear"></i>
+        </button>
+      </kbn-tooltip>
+    </div>
+  </navbar>
+
+  <config config-template="configTemplate" config-object="opts"></config>
+
+  <filter-bar state="state"></filter-bar>
+
+  <div ng-show="!state.panels.length" class="text-center start-screen">
+    <h2>Ready to get started?</h2>
+    <p>Click the <a class="btn btn-xs navbtn-inverse" ng-click="configTemplate.open('pickVis'); toggleAddVisualization = !toggleAddVisualization" aria-label="Add visualization"><i aria-hidden="true" class="fa fa-plus-circle"></i></a> button in the menu bar above to add a visualization to the dashboard. <br/>If you haven't setup a visualization yet visit the <a href="#/visualize" title="Visualize">"Visualize"</a> tab to create your first visualization.</p>
+  </div>
+
+  <dashboard-grid></dashboard-grid>
+</div>
