@@ -38,7 +38,7 @@
 
         <li ng-if="chrome.getBrand('title')" class="navbar-brand">{{ chrome.getBrand('title') }}</li>
         <li ng-repeat="tab in chrome.getTabs()" ng-class="{ active: tab.active }">
-          <a ng-href="{{ tab.href() }}" ng-style="{ 'border-bottom-color': tab.activeIndicatorColor }">
+          <a ng-href="{{ tab.href() }}">
             {{ tab.title }}
           </a>
         </li>

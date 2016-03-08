@@ -33,7 +33,7 @@ define(function (require) {
   .when('/dashboard', {
     template: require('plugins/kibana/dashboard/index.html'),
     resolve: {
-      dash: function (savedDashboards) {
+      dash: function (savedDashboards, config) {
         return savedDashboards.get();
       }
     }
@@ -169,7 +169,6 @@ define(function (require) {
             dash.searchSource.set('filter', filters);
           }
         }
-
         function setDarkTheme(enabled) {
           var theme = Boolean(enabled) ? 'theme-dark' : 'theme-light';
           chrome.removeApplicationClass(['theme-dark', 'theme-light']);
