@@ -38,19 +38,43 @@ define(function (require) {
       }
     }
   })
-  .when('/Portal-Usage', {
+  .when('/IFE-Summary', {
     template: require('plugins/kibana/dashboard/index.html'),
     resolve: {
       dash: function (savedDashboards, Notifier, $route, $location, courier) {
-        return savedDashboards.get('Portal-Usage');
+        return savedDashboards.get('IFE-Summary');
       }
     }
   })
-  .when('/Media-Usage', {
+  .when('/Usage-Summary', {
     template: require('plugins/kibana/dashboard/index.html'),
     resolve: {
       dash: function (savedDashboards, Notifier, $route, $location, courier) {
-        return savedDashboards.get('Media-Usage');
+        return savedDashboards.get('Usage-Summary');
+      }
+    }
+  })
+  .when('/IFE-LOPA', {
+    template: require('plugins/kibana/dashboard/index.html'),
+    resolve: {
+      dash: function (savedDashboards, Notifier, $route, $location, courier) {
+        return savedDashboards.get('IFE-LOPA');
+      }
+    }
+  })
+  .when('/Portal-Summary', {
+    template: require('plugins/kibana/dashboard/index.html'),
+    resolve: {
+      dash: function (savedDashboards, Notifier, $route, $location, courier) {
+        return savedDashboards.get('Portal-Summary');
+      }
+    }
+  })
+  .when('/Portal-Navigation', {
+    template: require('plugins/kibana/dashboard/index.html'),
+    resolve: {
+      dash: function (savedDashboards, Notifier, $route, $location, courier) {
+        return savedDashboards.get('Portal-Navigation');
       }
     }
   })
@@ -169,6 +193,7 @@ define(function (require) {
             dash.searchSource.set('filter', filters);
           }
         }
+        setDarkTheme(true);
         function setDarkTheme(enabled) {
           var theme = Boolean(enabled) ? 'theme-dark' : 'theme-light';
           chrome.removeApplicationClass(['theme-dark', 'theme-light']);

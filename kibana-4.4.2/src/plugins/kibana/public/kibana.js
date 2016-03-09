@@ -34,12 +34,24 @@ chrome
 })
 .setTabs([
   {
-    id: 'Media-Usage',
-    title: 'Media Usage'
+    id: 'Usage-Summary',
+    title: 'Usage Summary'
   },
   {
-    id: 'Portal-Usage',
-    title: 'Portal Usage'
+    id: 'IFE-Summary',
+    title: 'IFE Summary'
+  },
+  {
+    id: 'IFE-LOPA',
+    title: 'IFE LOPA'
+  },
+  {
+    id: 'Portal-Summary',
+    title: 'Portal Summary'
+  },
+  {
+    id: 'Portal-Navigation',
+    title: 'Portal Navigation'
   }
 ])
 .setRootController('kibana', function ($scope, $rootScope, courier, config) {
