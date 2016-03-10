@@ -38,20 +38,20 @@ chrome
     title: 'Usage Summary'
   },
   {
-    id: 'IFE-Summary',
-    title: 'IFE Summary'
+    id: 'IFE-Usage',
+    title: 'IFE Usage'
   },
   {
     id: 'IFE-LOPA',
     title: 'IFE LOPA'
   },
   {
-    id: 'Portal-Summary',
-    title: 'Portal Summary'
+    id: 'Portal-Usage',
+    title: 'Portal Usage'
   },
   {
-    id: 'Portal-Navigation',
-    title: 'Portal Navigation'
+    id: 'Portal-Click-Path',
+    title: 'Portal Click Path'
   }
 ])
 .setRootController('kibana', function ($scope, $rootScope, courier, config) {

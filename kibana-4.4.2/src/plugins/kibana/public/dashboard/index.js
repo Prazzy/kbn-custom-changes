@@ -38,11 +38,11 @@ define(function (require) {
       }
     }
   })
-  .when('/IFE-Summary', {
+  .when('/IFE-Usage', {
     template: require('plugins/kibana/dashboard/index.html'),
     resolve: {
       dash: function (savedDashboards, Notifier, $route, $location, courier) {
-        return savedDashboards.get('IFE-Summary');
+        return savedDashboards.get('IFE-Usage');
       }
     }
   })
@@ -62,19 +62,19 @@ define(function (require) {
       }
     }
   })
-  .when('/Portal-Summary', {
+  .when('/Portal-Usage', {
     template: require('plugins/kibana/dashboard/index.html'),
     resolve: {
       dash: function (savedDashboards, Notifier, $route, $location, courier) {
-        return savedDashboards.get('Portal-Summary');
+        return savedDashboards.get('Portal-Usage');
       }
     }
   })
-  .when('/Portal-Navigation', {
+  .when('/Portal-Click-Path', {
     template: require('plugins/kibana/dashboard/index.html'),
     resolve: {
       dash: function (savedDashboards, Notifier, $route, $location, courier) {
-        return savedDashboards.get('Portal-Navigation');
+        return savedDashboards.get('Portal-Click-Path');
       }
     }
   })
