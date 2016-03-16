@@ -78,6 +78,14 @@ define(function (require) {
       }
     }
   })
+  .when('/Shopping', {
+    template: require('plugins/kibana/dashboard/index.html'),
+    resolve: {
+      dash: function (savedDashboards, Notifier, $route, $location, courier) {
+        return savedDashboards.get('Shopping');
+      }
+    }
+  })
   .when('/dashboard/:id', {
     template: require('plugins/kibana/dashboard/index.html'),
     resolve: {
@@ -193,7 +201,7 @@ define(function (require) {
             dash.searchSource.set('filter', filters);
           }
         }
-        setDarkTheme(true);
+
         function setDarkTheme(enabled) {
           var theme = Boolean(enabled) ? 'theme-dark' : 'theme-light';
           chrome.removeApplicationClass(['theme-dark', 'theme-light']);

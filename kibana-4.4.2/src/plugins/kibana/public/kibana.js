@@ -18,7 +18,7 @@ routes.enable();
 routes
 .otherwise({
   //redirectTo: `/${chrome.getInjected('kbnDefaultAppId', 'discover')}`
-  redirectTo: `/Media-Usage`
+  redirectTo: `/IFE-Usage`
 });
 
 chrome
@@ -52,6 +52,10 @@ chrome
   {
     id: 'Portal-Click-Path',
     title: 'Portal Click Path'
+  },
+  {
+    id: 'Shopping',
+    title: 'Shopping'
   }
 ])
 .setRootController('kibana', function ($scope, $rootScope, courier, config) {
