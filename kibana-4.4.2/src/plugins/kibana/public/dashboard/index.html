@@ -22,13 +22,13 @@
     <!-- Full navbar -->
     <div ng-class="{ show: chrome.getVisible() }" collapse="!showCollapsed" class="navbar-collapse" kbn-chrome-append-nav-controls>
       <ul class="nav navbar-nav" role="navigation" >
-        <li class="logo">PanaAir</li>
-        <!--<li-->
-          <!--ng-if="chrome.getBrand('logo')"-->
-          <!--ng-style="{ 'background': chrome.getBrand('logo') }"-->
-          <!--aria-label="{{ chrome.getAppTitle() }} Logo"-->
-          <!--class="logo hidden-sm"-->
-          <!--&gt;</li>-->
+        <!--<li class="logo">PanaAir</li>-->
+        <li
+          ng-if="chrome.getBrand('logo')"
+          ng-style="{ 'background': chrome.getBrand('logo') }"
+          aria-label="{{ chrome.getAppTitle() }} Logo"
+          class="logo hidden-sm"
+          ></li>
 
         <!--<li-->
           <!--ng-if="chrome.getBrand('smallLogo')"-->
