@@ -18,7 +18,7 @@ routes.enable();
 routes
 .otherwise({
   //redirectTo: `/${chrome.getInjected('kbnDefaultAppId', 'discover')}`
-  redirectTo: `/IFE-Usage`
+  redirectTo: `/Usage-Summary`
 });
 
 chrome
